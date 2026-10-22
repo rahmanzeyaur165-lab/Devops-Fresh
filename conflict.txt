@@ -1,1 +1,2 @@
-Welcome to Git Feature One
+Welcome to DevOps - Merge Conflict Resolved
+
