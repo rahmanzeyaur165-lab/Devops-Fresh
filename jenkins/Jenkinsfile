@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Hello from Jenkins!'
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                echo 'DevOps configuration repository verified.'
+            }
+        }
+    }
+}
