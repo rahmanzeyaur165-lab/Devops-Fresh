@@ -1,0 +1,14 @@
+Task 13: Find MAC Addresses of Local Network Devices
+
+Command Used: ipconfig /all
+
+Adapter                  Status        MAC Address
+Wi-Fi                    Connected     XX-XX-XX-XX-XX-XX
+Ethernet                 Disconnected  XX-XX-XX-XX-XX-XX
+WSL/Hyper-V Virtual      Available     XX-XX-XX-XX-XX-XX
+Bluetooth                Disconnected  XX-XX-XX-XX-XX-XX
+
+Conclusion:
+The ipconfig /all command displays network adapter details,
+including physical (MAC) addresses and IP configuration.
+Actual device identifiers are redacted for privacy.
