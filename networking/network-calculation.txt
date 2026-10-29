@@ -1,0 +1,33 @@
+Task 9: Network ID, Broadcast ID, and Usable IP Range
+
+Example 1:
+IP Address: 192.168.1.10
+Subnet Mask: 255.255.255.0 (/24)
+Network ID: 192.168.1.0
+Broadcast ID: 192.168.1.255
+First Usable IP: 192.168.1.1
+Last Usable IP: 192.168.1.254
+Total Usable Hosts: 254
+
+Example 2:
+IP Address: 10.0.0.25
+Subnet Mask: 255.255.255.0 (/24)
+Network ID: 10.0.0.0
+Broadcast ID: 10.0.0.255
+First Usable IP: 10.0.0.1
+Last Usable IP: 10.0.0.254
+Total Usable Hosts: 254
+
+Example 3:
+IP Address: 172.16.5.20
+Subnet Mask: 255.255.255.0 (/24)
+Network ID: 172.16.5.0
+Broadcast ID: 172.16.5.255
+First Usable IP: 172.16.5.1
+Last Usable IP: 172.16.5.254
+Total Usable Hosts: 254
+
+Formula for /24:
+Network ID = First address in the subnet
+Broadcast ID = Last address in the subnet
+Usable Hosts = 2^(32 - prefix length) - 2
