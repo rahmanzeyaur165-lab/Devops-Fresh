@@ -1,0 +1,34 @@
+Task 11: IP Addressing Scheme for 4 Departments
+
+Company Network: 192.168.0.0/16
+Subnet Mask per Department: 255.255.255.0 (/24)
+
+Department 1: HR
+Network ID: 192.168.1.0/24
+Gateway: 192.168.1.1
+Usable IP Range: 192.168.1.2 - 192.168.1.254
+Broadcast: 192.168.1.255
+
+Department 2: Finance
+Network ID: 192.168.2.0/24
+Gateway: 192.168.2.1
+Usable IP Range: 192.168.2.2 - 192.168.2.254
+Broadcast: 192.168.2.255
+
+Department 3: IT
+Network ID: 192.168.3.0/24
+Gateway: 192.168.3.1
+Usable IP Range: 192.168.3.2 - 192.168.3.254
+Broadcast: 192.168.3.255
+
+Department 4: Sales
+Network ID: 192.168.4.0/24
+Gateway: 192.168.4.1
+Usable IP Range: 192.168.4.2 - 192.168.4.254
+Broadcast: 192.168.4.255
+
+Notes:
+- Each department has a separate /24 subnet.
+- Each subnet supports 254 usable IPv4 addresses.
+- The gateway is reserved for the router or Layer 3 interface.
+- Inter-department communication can be controlled using firewall or ACL rules.
