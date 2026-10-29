@@ -1,0 +1,18 @@
+Task 8: IP Address Classes
+
+Class A: First octet 1-126
+Example: 10.0.0.5
+
+Class B: First octet 128-191
+Example: 172.20.10.5
+
+Class C: First octet 192-223
+Example: 192.168.1.25
+
+Class D: First octet 224-239
+Purpose: Multicast
+
+Class E: First octet 240-255
+Purpose: Experimental/Reserved
+
+Note: 127.x.x.x is reserved for loopback.
