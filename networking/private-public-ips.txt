@@ -1,0 +1,27 @@
+Task 12: Identify Private and Public IP Addresses
+
+Private IPv4 Address Ranges:
+
+Class A Private:
+Range: 10.0.0.0 - 10.255.255.255
+Example: 10.1.2.3
+
+Class B Private:
+Range: 172.16.0.0 - 172.31.255.255
+Example: 172.20.10.5
+
+Class C Private:
+Range: 192.168.0.0 - 192.168.255.255
+Example: 192.168.1.25
+
+Public IP Examples:
+8.8.8.8
+1.1.1.1
+203.0.113.10
+
+Important Notes:
+- Private IPs are used inside private networks and are not directly routable on the public internet.
+- Public IPs are globally routable, subject to network and service configuration.
+- 8.8.8.8 and 1.1.1.1 are public IP examples.
+- 203.0.113.10 is reserved for documentation and is not a real public-host example.
+- A device using a private IP can access the internet through a router using NAT.
