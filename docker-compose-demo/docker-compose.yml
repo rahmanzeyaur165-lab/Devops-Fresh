@@ -1,0 +1,21 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: compose-nginx
+    ports:
+      - "8081:80"
+
+  mysql:
+    image: mysql:8.0
+    container_name: compose-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: devopsdb
+    ports:
+      - "3307:3306"
+
+  redis:
+    image: redis:alpine
+    container_name: compose-redis
+    ports:
+      - "6380:6379"
