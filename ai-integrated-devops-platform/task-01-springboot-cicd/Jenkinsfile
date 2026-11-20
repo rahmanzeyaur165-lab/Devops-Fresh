@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -47,6 +46,13 @@ pipeline {
         stage('Verify Kubernetes Access') {
             steps {
                 bat '"C:\\Program Files\\kubectl\\kubectl.exe" --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" get nodes'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                bat '"C:\\Program Files\\kubectl\\kubectl.exe" --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" set image deployment/incident-management incident-management=%IMAGE_NAME%:%IMAGE_TAG%'
+                bat '"C:\\Program Files\\kubectl\\kubectl.exe" --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" rollout status deployment/incident-management --timeout=120s'
             }
         }
     }
