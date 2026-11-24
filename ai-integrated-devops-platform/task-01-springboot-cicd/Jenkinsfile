@@ -20,6 +20,15 @@ pipeline {
                 }
             }
         }
+         stage('Test Docker Connection') {
+            steps {    
+                bat '''
+                    docker context show
+                    docker ps
+                    docker version
+                '''
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
