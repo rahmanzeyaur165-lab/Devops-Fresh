@@ -1,0 +1,39 @@
+---
+- name: Configure Linux Servers for Application Deployment
+  hosts: linux_servers
+  become: true
+  gather_facts: true
+  serial: 10
+  any_errors_fatal: true
+  tasks:
+    - name: Install Java 21 and required packages
+      ansible.builtin.apt:
+        name:
+          - openjdk-21-jdk
+          - curl
+          - git
+          - unzip
+        state: present
+        update_cache: true
+
+    - name: Create application directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: "0755"
+      loop:
+        - /opt/incident-management
+        - /var/log/incident-management
+
+    - name: Configure application environment variables
+      ansible.builtin.copy:
+        dest: /etc/profile.d/incident-management.sh
+        content: |
+          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+          export APP_HOME=/opt/incident-management
+          export APP_ENV=production
+        owner: root
+        group: root
+        mode: "0644"

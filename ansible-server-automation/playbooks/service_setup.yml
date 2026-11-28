@@ -1,0 +1,77 @@
+---
+- name: Configure and restart application service
+  hosts: linux_servers
+  become: true
+  gather_facts: true
+  serial: 10
+  any_errors_fatal: true
+
+  tasks:
+    - name: Install Supervisor
+      ansible.builtin.apt:
+        name: supervisor
+        state: present
+        update_cache: true
+
+    - name: Ensure Supervisor runtime directory exists
+      ansible.builtin.file:
+        path: /var/run/supervisor
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Check whether Supervisor daemon is running
+      ansible.builtin.command: pgrep -x supervisord
+      register: supervisor_process
+      changed_when: false
+      failed_when: false
+
+    - name: Start Supervisor daemon if not running
+      ansible.builtin.command:
+        argv:
+          - /usr/bin/supervisord
+          - -c
+          - /etc/supervisor/supervisord.conf
+      when: supervisor_process.rc != 0
+
+    - name: Create application service configuration
+      ansible.builtin.copy:
+        dest: /etc/supervisor/conf.d/incident-management.conf
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          [program:incident-management]
+          command=/bin/bash -c 'while true; do sleep 3600; done'
+          directory=/opt/incident-management
+          user=ansible
+          autostart=true
+          autorestart=true
+          stdout_logfile=/var/log/incident-management/service.log
+          stderr_logfile=/var/log/incident-management/error.log
+
+    - name: Reload Supervisor configuration
+      ansible.builtin.command: supervisorctl reread
+      register: supervisor_reread
+      changed_when: "'available' in supervisor_reread.stdout"
+
+    - name: Update Supervisor process configuration
+      ansible.builtin.command: supervisorctl update
+      register: supervisor_update
+      changed_when: "'added process group' in supervisor_update.stdout"
+
+    - name: Restart incident management service
+      ansible.builtin.command: supervisorctl restart incident-management
+      register: service_restart
+      changed_when: service_restart.rc == 0
+
+    - name: Verify incident management service
+      ansible.builtin.command: supervisorctl status incident-management
+      register: service_status
+      changed_when: false
+      failed_when: "'RUNNING' not in service_status.stdout"
+
+    - name: Display service status
+      ansible.builtin.debug:
+        var: service_status.stdout
